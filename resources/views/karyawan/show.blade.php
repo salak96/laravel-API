@@ -11,10 +11,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 mt-5">
                 <h1>Edit Employee</h1>
-                <form method="post" action="{{ route('karyawans.update', $karyawan->id)}}">
+                <form method="post" action="{{ route('karyawans.update')}}">
                     @csrf
                     @method('PUT')
-                    <div class="mb-3">
+                   <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama" placeholder="Name" name="nama">
                         @error('nama')

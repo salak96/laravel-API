@@ -36,7 +36,7 @@
                             <td>{{ $karyawan->email }}</td>
                             <td>{{ $karyawan->no_hp }}</td>
                             <td>
-                                <a href="{{ route('karyawans.edit', $karyawan->id) }}" class="btn btn-primary">Edit</a>
+                              <a href="{{ route('karyawans.edit', $karyawan->id) }}" class="btn btn-primary">Edit</a>
                                 </td>
                                   <form onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');" class="d-inline" action="/karyawans/{{ $karyawan->id }}" method="POST">
                         @csrf

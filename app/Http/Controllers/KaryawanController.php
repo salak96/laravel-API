@@ -25,12 +25,26 @@ class KaryawanController extends Controller
     {
         return view('form_create_karyawan');
     }
+    public function edit(Karyawan $karyawan)
+    {
 
+        return view('edit_karyawan', compact('karyawan'));
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+        // //valiasi
+        $request->validate([
+            'nama' => 'required|min:3|max:100',
+            'jabatan' => 'required',
+            'status' => 'required',
+            'email' => 'required',
+            'no_hp' => 'required',
+        ]);
+        
+        // // //simpan
        
        Karyawan::create([
            'nama' => $request->nama,
@@ -39,10 +53,8 @@ class KaryawanController extends Controller
            'email' => $request->email,
            'no_hp' => $request->no_hp,
        ]);
-       //cek
-   // Cek apakah data berhasil dimasukkan
-      
-       return redirect('/karyawans');
+       
+       return redirect('/karyawans')->with('status', 'Data Berhasil');
     
     }
     
@@ -50,12 +62,10 @@ class KaryawanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Karyawan $karyawan)
+    public function show(Karyawan $id)
     {
-        $karyawan = Karyawan::find($karyawan->id);
-        return view('edit_karyawan', [
-            'karyawan' => $karyawan
-        ]);
+        $karyawan = Karyawan::findOrFail($id);
+        return view('karyawan.show', compact('karyawan'));
     }
 
 
@@ -64,13 +74,13 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
-        //valiasi
+        //validasi
         $request->validate([
-            'nama' => 'required|min:3|max10',
-            'jabatan' => 'required',
+            'nama' => 'required|min:3|max:20',
+            'jabatan' => 'required|min:3|max:10',
             'status' => 'required',
             'email' => 'required',
-            'no_hp' => 'required',
+            'no_hp' => 'required|min:8|max:14',
         ]);
         //update database
         $karyawan->update([
@@ -80,7 +90,8 @@ class KaryawanController extends Controller
             'email' => $request->email,
             'no_hp' => $request->no_hp,
         ]);
-        return redirect('karyawans');
+   
+        return redirect('/karyawans')->with('status', 'Data Berhasil');
     }
 
     /**
