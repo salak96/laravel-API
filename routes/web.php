@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/karyawans',[KaryawanController::class, 'index']);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+//mengambil semua data get
+Route::resource('/karyawans', KaryawanController::class);

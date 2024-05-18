@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1 class="mt-5">Data Pegawai</h1>
-       
+        <a href="{{ route('karyawans.create') }}" class="btn btn-primary">Tambah</a>
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -23,6 +23,7 @@
                             <th>Status</th>
                             <th>email</th>
                             <th>No_hp</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,8 +35,21 @@
                             <td>{{ $karyawan->status }}</td>
                             <td>{{ $karyawan->email }}</td>
                             <td>{{ $karyawan->no_hp }}</td>
+                            <td>
+                                <a href="{{ route('karyawans.edit', $karyawan->id) }}" class="btn btn-primary">Edit</a>
+                                </td>
+                                  <form onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');" class="d-inline" action="/karyawans/{{ $karyawan->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <td>
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                        </td>
+                    </form>
                         </tr>
+                                  
                         @endforeach
+                        
+
                     </tbody>
                 </table>
             </div>
